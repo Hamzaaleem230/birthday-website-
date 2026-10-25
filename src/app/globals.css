@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
+@theme {
+  --color-navy: #080D18;
+  --color-card-blue: #19263A;
+  --color-gold: #E7C77B;
+  --color-gold-light: #F0D695;
+  --color-gold-muted: #C2A256;
+  --color-warm-white: #F6F3EB;
+  --color-muted-blue: #94A3B8;
+
+  --font-serif: var(--font-serif), Cormorant Garamond, Georgia, serif;
+  --font-sans: var(--font-sans), Inter, system-ui, -apple-system, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-navy: #080D18;
+  --card-blue: #19263A;
+  --gold: #E7C77B;
+  --gold-light: #F0D695;
+  --gold-muted: #C2A256;
+  --text-primary: #F6F3EB;
+  --text-secondary: #94A3B8;
+  --border-gold-subtle: rgba(231, 199, 123, 0.15);
+  --border-gold-medium: rgba(231, 199, 123, 0.3);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-navy);
+  color: var(--text-primary);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Helpers */
+.font-serif {
+  font-family: var(--font-serif), Cormorant Garamond, Georgia, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), Inter, system-ui, -apple-system, sans-serif;
+}
+
+/* Ambient Background & Particles */
+.ambient-bg {
+  background-color: #080D18;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(231, 199, 123, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 85% 90%, rgba(25, 38, 58, 0.6) 0%, transparent 50%),
+    radial-gradient(circle at 15% 50%, rgba(231, 199, 123, 0.03) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+.ambient-particles {
+  position: relative;
+}
+
+.ambient-particles::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(231, 199, 123, 0.12) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  opacity: 0.25;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+}
+
+/* Card & Surface Tokens */
+.card-surface {
+  background-color: #19263A;
+  border: 1px solid rgba(231, 199, 123, 0.15);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px -10px rgba(8, 13, 24, 0.8), 0 0 15px rgba(231, 199, 123, 0.03);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-surface:hover {
+  border-color: rgba(231, 199, 123, 0.3);
+  box-shadow: 0 12px 35px -10px rgba(8, 13, 24, 0.9), 0 0 20px rgba(231, 199, 123, 0.08);
+}
+
+/* Gold Gradient Text */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFFDF7 0%, #E7C77B 50%, #C2A256 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gold Border Utilities */
+.gold-border {
+  border: 1px solid rgba(231, 199, 123, 0.18);
+}
+
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(231, 199, 123, 0.3) 50%, transparent 100%);
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
